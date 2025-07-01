@@ -3,106 +3,130 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="color-scheme" content="light only"/>
   <title>Catálogo | Alz</title>
   <style>
+    :root {
+      --bg-color: #ffffff;
+      --header-bg: #f4f4f4;
+      --text-color: #111;
+      --subtext-color: #333;
+      --card-bg: #f8f8f8;
+    }
+
+    body.dark-mode {
+      --bg-color: #121212;
+      --header-bg: #1e1e1e;
+      --text-color: #ffffff;
+      --subtext-color: #ccc;
+      --card-bg: #1a1a1a;
+    }
+
     body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: #ffffff;
-  color: #111;
-  overflow-x: hidden;
-}
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      overflow-x: hidden;
+      transition: background 0.3s, color 0.3s;
+    }
 
-header {
-  text-align: center;
-  padding: 40px 20px;
-  background: #f4f4f4;
-  border-bottom: 2px solid #000;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
+    header {
+      text-align: center;
+      padding: 40px 20px;
+      background: var(--header-bg);
+      border-bottom: 2px solid #000;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      position: relative;
+    }
 
-.perfil {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-}
+    .perfil {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
 
-.foto-perfil {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  border: 2px solid #000;
-  box-shadow: 0 0 5px rgba(0,0,0,0.2);
-}
+    .foto-perfil {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      border: 2px solid #000;
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    }
 
-.nombre {
-  font-size: 2.5rem;
-  color: #111;
-}
+    .nombre {
+      font-size: 2.5rem;
+      color: var(--text-color);
+    }
 
-.subtitulo {
-  font-size: 1rem;
-  color: #333;
-  margin-top: 10px;
-  opacity: 0.9;
-}
+    .subtitulo {
+      font-size: 1rem;
+      color: var(--subtext-color);
+      margin-top: 10px;
+      opacity: 0.9;
+    }
 
-.catalogo {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 25px;
-  padding: 40px 30px;
-}
+    .modo-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      padding: 8px 14px;
+      font-size: 0.9rem;
+      background: none;
+      border: 2px solid var(--text-color);
+      border-radius: 5px;
+      cursor: pointer;
+      color: var(--text-color);
+      transition: background 0.3s, color 0.3s, border 0.3s;
+    }
 
-.producto {
-  background: #f8f8f8;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 0 12px rgba(0,0,0,0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  opacity: 0;
-  transform: translateY(30px);
-}
+    .catalogo {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+      padding: 40px 30px;
+    }
 
-.producto img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
+    .producto {
+      background: var(--card-bg);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 0 12px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-.producto .info {
-  padding: 15px;
-}
+    .producto img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
 
-.producto .info h3 {
-  margin: 0;
-  font-size: 1.1rem;
-  color: #111;
-}
+    .producto .info {
+      padding: 15px;
+    }
 
-.producto .info p {
-  margin-top: 5px;
-  color: #333;
-  font-size: 0.95rem;
-}
+    .producto .info h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      color: var(--text-color);
+    }
 
-.producto:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 15px rgba(0,0,0,0.15);
-}
+    .producto .info p {
+      margin-top: 5px;
+      color: var(--subtext-color);
+      font-size: 0.95rem;
+    }
 
-@keyframes aparecer {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
-}
-
+    .producto:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px rgba(0,0,0,0.15);
+    }
   </style>
 </head>
 <body>
 
   <header>
+    <button class="modo-btn" onclick="toggleModo()">🌙 Modo Oscuro</button>
     <div class="perfil">
       <img src="img/perfil.jpg" alt="Alz" class="foto-perfil">
       <h1 class="nombre">alz</h1>
@@ -112,17 +136,15 @@ header {
 
   <main class="catalogo">
 
-    <!-- Producto 1 -->
-    <a href="https://wa.me/526381071483?text=Hola,%20quiero%20comprar:%20Configuración%20y%20Metodos" target="_blank" class="producto animado">
+    <a href="https://wa.me/526381071483?text=Hola,%20quiero%20comprar:%20Configuración%20y%20Metodos" target="_blank" class="producto">
       <img src="img/producto1.jpg" alt="Producto 1">
       <div class="info">
-        <h3>Configuración y Metodos</h3>
+        <h3>Configuración y Métodos</h3>
         <p>$15.00 USD</p>
       </div>
     </a>
 
-    <!-- Producto 2 -->
-    <a href="https://wa.me/526381071483?text=Hola,%20quiero%20comprar:%20Auxilio%20de%20Mira" target="_blank" class="producto animado">
+    <a href="https://wa.me/526381071483?text=Hola,%20quiero%20comprar:%20Auxilio%20de%20Mira" target="_blank" class="producto">
       <img src="img/producto2.jpg" alt="Producto 2">
       <div class="info">
         <h3>Auxilio de Mira</h3>
@@ -130,8 +152,7 @@ header {
       </div>
     </a>
 
-    <!-- Producto 3 -->
-    <a href="https://wa.me/526381071483?text=Hola,%20quiero%20comprar:%20Panel%20Fluck" target="_blank" class="producto animado">
+    <a href="https://wa.me/526381071483?text=Hola,%20quiero%20comprar:%20Panel%20Fluck" target="_blank" class="producto">
       <img src="img/producto3.jpg" alt="Producto 3">
       <div class="info">
         <h3>Panel Fluck</h3>
@@ -139,8 +160,7 @@ header {
       </div>
     </a>
 
-    <!-- Producto 4 -->
-    <a href="https://wa.me/526381071483?text=Hola,%20quiero%20comprar:%20DNS%20Precisión" target="_blank" class="producto animado">
+    <a href="https://wa.me/526381071483?text=Hola,%20quiero%20comprar:%20DNS%20Precisión" target="_blank" class="producto">
       <img src="img/producto4.jpg" alt="Producto 4">
       <div class="info">
         <h3>DNS Precisión</h3>
@@ -148,8 +168,7 @@ header {
       </div>
     </a>
 
-    <!-- Producto 5 -->
-    <a href="https://wa.me/526381071483?text=Hola,%20quiero%20comprar:%20Regedit%20iOS/Android" target="_blank" class="producto animado">
+    <a href="https://wa.me/526381071483?text=Hola,%20quiero%20comprar:%20Regedit%20iOS/Android" target="_blank" class="producto">
       <img src="img/producto5.jpg" alt="Producto 5">
       <div class="info">
         <h3>Regedit iOS/Android</h3>
@@ -157,8 +176,7 @@ header {
       </div>
     </a>
 
-    <!-- Producto 6 -->
-    <a href="https://wa.me/526381071483?text=Hola,%20quiero%20comprar:%20Auxilio%20de%20mira%20personalizado" target="_blank" class="producto animado">
+    <a href="https://wa.me/526381071483?text=Hola,%20quiero%20comprar:%20Auxilio%20de%20mira%20personalizado" target="_blank" class="producto">
       <img src="img/producto6.jpg" alt="Producto 6">
       <div class="info">
         <h3>Auxilio de mira personalizado</h3>
@@ -168,6 +186,17 @@ header {
 
   </main>
 
-  <script src="script.js"></script>
+  <script>
+    function toggleModo() {
+      document.body.classList.toggle("dark-mode");
+      const btn = document.querySelector(".modo-btn");
+      if (document.body.classList.contains("dark-mode")) {
+        btn.textContent = "☀️ Modo Claro";
+      } else {
+        btn.textContent = "🌙 Modo Oscuro";
+      }
+    }
+  </script>
+
 </body>
 </html>
