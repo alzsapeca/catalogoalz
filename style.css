@@ -1,0 +1,91 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #ffffff;
+  color: #111;
+  overflow-x: hidden;
+}
+
+header {
+  text-align: center;
+  padding: 40px 20px;
+  background: #f4f4f4;
+  border-bottom: 2px solid #000;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.perfil {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.foto-perfil {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 2px solid #000;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+.nombre {
+  font-size: 2.5rem;
+  color: #111;
+}
+
+.subtitulo {
+  font-size: 1rem;
+  color: #333;
+  margin-top: 10px;
+  opacity: 0.9;
+}
+
+.catalogo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  padding: 40px 30px;
+}
+
+.producto {
+  background: #f8f8f8;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 0 12px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.producto img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.producto .info {
+  padding: 15px;
+}
+
+.producto .info h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #111;
+}
+
+.producto .info p {
+  margin-top: 5px;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.producto:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(0,0,0,0.15);
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
